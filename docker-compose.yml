@@ -9,8 +9,6 @@ services:
       - 80:80
     links:
       - consul
-    depends_on:
-      - registrator
     restart: on-failure:10
   
   consul:
