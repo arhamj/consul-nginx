@@ -20,15 +20,3 @@ services:
     restart: on-failure:10
     ports:
       - "8500:8500"
-
-  registrator:
-    image: gliderlabs/registrator:latest
-    env_file: .env
-    links:
-      - consul
-    volumes:
-      - /var/run/docker.sock:/tmp/docker.sock
-    command: consul://consul:8500 
-    depends_on:
-      - consul
-    restart: on-failure:10

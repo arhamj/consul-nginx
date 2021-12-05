@@ -27,26 +27,3 @@ server {
   }
 }
 {{ end }}{{ end }}
-
-## Service: Consul UI
-server {
-  listen 80 default_server;
-  server_name _;
-
-  location /favicon {
-    empty_gif;
-    access_log off;
-    log_not_found off;
-  }
-
-  location /nginx_status {
-    stub_status on;
-    allow 127.0.0.1;
-    allow 172.17.0.1;
-    deny all;
-  }
-
-  location /consul {
-     proxy_pass http://consul:8500;
-  }
-}
