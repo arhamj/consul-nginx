@@ -6,11 +6,11 @@ services:
     environment:
       SERVICE_NAME: router
     ports:
-      - 80:80
+      - "80:80"
     links:
       - consul
     restart: on-failure:10
-  
+
   consul:
     image: consul
     env_file: .env
@@ -20,3 +20,12 @@ services:
       - "8500:8500"
     volumes:
       - ./docker-volumes/consul/data:/data
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    volumes:
+      - ./docker-volumes/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+    restart: on-failure:10
